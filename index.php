@@ -35,7 +35,7 @@
                 
         ?>
         
-        <form action='screens/user.php?action=login' method='POST'>
+        <form action='model/user.php?action=login' method='POST'>
             <input type='text' name='user'></br>
             <input type='password' name='pass'></br>
             <input type='submit' name='submit' value="Entrar">

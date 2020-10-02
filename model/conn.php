@@ -23,6 +23,7 @@
 
                 header('location:../index.php?page=home');
             }else{
+                echo $query;
                 header('location:../index.php?login=fail');
             }
         }
@@ -35,7 +36,8 @@
             $_SESSION['user_name']=$data[1];
             $_SESSION['user_email']=$data[2];
             $_SESSION['user_pass']=$data[3];
-            header('location: ../index.php?page=perfil');
+            echo 'editou';
+            //header('location: ../index.php?page=perfil');
         }
 
         function register_user($data){
@@ -43,12 +45,11 @@
             $query ="INSERT INTO user(user_name, user_email, user_pass) VALUES ( '".$data[0]."', '".$data[1]."', '".$data[2]."')";
             $result = mysqli_query($conn, $query);
             session_start();
-            $_SESSION['user_id']=$data[0];
-            $_SESSION['user_name']=$data[1];
-            $_SESSION['user_email']=$data[2];
-            $_SESSION['user_pass']=$data[3];
-
-            header('location:../index.php?page=home');
+            $_SESSION['user_name']=$data[0];
+            $_SESSION['user_email']=$data[1];
+            $_SESSION['user_pass']=$data[2];
+            echo 'registrou';
+            //header('location:../index.php?page=home');
         }
     }
 ?>
