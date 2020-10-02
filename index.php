@@ -19,7 +19,8 @@
 
                         case 'home':    $_SESSION['page'] = 'animation start-home';
                                         include('screens/home_page.php');break;
-
+                        case 'itens_register':
+                        case 'itens_edit':
                         case 'itens':  $_SESSION['page'] = 'animation start-blog'; 
                                         include('screens/itens_page.php');break;
 

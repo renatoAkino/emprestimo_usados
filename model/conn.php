@@ -10,9 +10,8 @@
         
 
         function  login($name, $pass){
-            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
             $query="SELECT * FROM user WHERE user_name='".$name."' and user_pass= '".$pass."'";
-            $result = mysqli_query($conn, $query);
+            $result = $this->execute_query($query);
             if(mysqli_num_rows($result) == 1){
                 $data = mysqli_fetch_array($result);
                 session_start();
@@ -29,27 +28,63 @@
         }
 
         function edit_user($data){
-            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
             $query = "UPDATE user SET user_name='".$data[1]."',user_email='".$data[2]."',user_pass='".$data[3]."' WHERE user_id = ".$data[0]."";
-            $result = mysqli_query($conn, $query);
+            $result = $this->execute_query($query);
             $_SESSION['user_id']=$data[0];
             $_SESSION['user_name']=$data[1];
             $_SESSION['user_email']=$data[2];
             $_SESSION['user_pass']=$data[3];
-            echo 'editou';
-            //header('location: ../index.php?page=perfil');
+            header('location: ../index.php?page=perfil');
         }
 
         function register_user($data){
             $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
             $query ="INSERT INTO user(user_name, user_email, user_pass) VALUES ( '".$data[0]."', '".$data[1]."', '".$data[2]."')";
-            $result = mysqli_query($conn, $query);
+            $result = $this->execute_query($query);
             session_start();
             $_SESSION['user_name']=$data[0];
             $_SESSION['user_email']=$data[1];
             $_SESSION['user_pass']=$data[2];
             echo 'registrou';
-            //header('location:../index.php?page=home');
+            header('location:../index.php?page=home');
+        }
+
+        function register_item($data){
+            
+            $query ="INSERT INTO item(item_name, item_desc, item_img, item_status, user_id) VALUES ( '".$data[0]."', '".$data[1]."', '".$data[2]."' , '".$data[3]."' ,'".$data[4]."' )";
+            $result = $this->execute_query($query);
+            return 'talvez tenha dado';
+            //header('location:index.php?page=itens');
+        }
+
+        function edit_item($data){
+            $query = "UPDATE item SET item_name='".$data[1]."',item_desc ='".$data[2]."',item_img='".$data[3]."',item_status='".$data[4]."' WHERE user_id = ".$data[0]."";
+            $result = $this->execute_query($query);
+            header('location: ../index.php?page=itens');
+        }
+
+        
+        function delete_item($item_id)
+        {
+            $query = "DELETE FROM item WHERE item_id = ". $item_id;
+            $this->execute_query($query);
+        }
+
+        function list_user_itens($user_id){
+            $query = 'SELECT * FROM item WHERE user_id = '.$user_id;
+            $result = $this->execute_query($query);
+            if(mysqli_num_rows($result) >= 1){
+                $data = mysqli_fetch_all($result);
+                return $data;
+            }else{
+                echo $query;
+            } 
+        }
+
+        function execute_query($query){
+            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
+            $result = mysqli_query($conn, $query);
+            return $result;
         }
     }
 ?>
