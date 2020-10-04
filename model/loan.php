@@ -1,5 +1,5 @@
 <?php
- include('dao/loan_dao.php');
+ include('dao/Item_dao.php');
 
         
 class Loan{
@@ -23,7 +23,7 @@ class Loan{
             $data_array = $conn->list_unloan_itens();
             $itens_list = array();
             foreach($data_array as $data){
-                $item = new Loan_DAO($data);
+                $item = new Item_DAO($data);
                 array_push($itens_list,$item);
             }
             return $this->cards_unloan_itens_list($itens_list);
@@ -40,7 +40,8 @@ class Loan{
         
          foreach($itens_list as $item){
 
-            echo "<option value=".$item->getItem_id().">".$item->get_Item_name()."</option>";
+            echo "<option value=".$item->getItem_id().">".$item->getItem_name()."</option>";
+
         }
 
         

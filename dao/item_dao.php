@@ -1,5 +1,5 @@
 <?php
-    include('model/conn.php');
+    include_once('model/conn.php');
     class Item_DAO{
 
         private $item_id;
