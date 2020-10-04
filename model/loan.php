@@ -19,9 +19,9 @@ class Loan{
         }
 
         
-        public function get_unloan_itens(){
+        public function get_unloan_itens($user_id){
             $conn = new Connection_db ();
-            $data_array = $conn->list_unloan_itens();
+            $data_array = $conn->list_unloan_itens($user_id);
             $itens_list = array();
             foreach($data_array as $data){
                 $item = new Item_DAO($data);

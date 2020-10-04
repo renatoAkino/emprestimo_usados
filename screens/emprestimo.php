@@ -18,7 +18,7 @@
     <select name="item_id">
     <?php
     $model = new loan();
-    echo $model -> get_unloan_itens();
+    echo $model -> get_unloan_itens($_SESSION['user_id']);
     ?>
     </select>
      <input type="submit" value="Enviar">

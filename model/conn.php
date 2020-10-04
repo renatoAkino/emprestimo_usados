@@ -119,8 +119,8 @@
             } 
         }
 
-       function list_unloan_itens(){
-           $query = "SELECT * FROM item WHERE item_status = 'Disponivel'";
+       function list_unloan_itens($user_id){
+           $query = "SELECT * FROM item WHERE item_status = 'Disponivel' AND user_id != ". $user_id;
            $result = $this->execute_query($query);
            if(mysqli_num_rows($result) > 0){
                $data  = mysqli_fetch_all($result);
