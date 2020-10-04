@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 02-Out-2020 às 19:59
--- Versão do servidor: 5.7.26
--- versão do PHP: 7.2.18
+-- Host: 127.0.0.1
+-- Generation Time: 04-Out-2020 às 23:58
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,17 +28,14 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `item`
 --
 
-DROP TABLE IF EXISTS `item`;
-CREATE TABLE IF NOT EXISTS `item` (
-  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `item` (
+  `item_id` int(11) NOT NULL,
   `item_name` varchar(255) NOT NULL,
   `item_desc` varchar(255) NOT NULL,
   `item_img` varchar(255) NOT NULL,
   `item_status` varchar(20) NOT NULL,
-  `user_id` int(255) NOT NULL,
-  PRIMARY KEY (`item_id`),
-  KEY `fk_item_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `user_id` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `item`
@@ -51,17 +48,28 @@ INSERT INTO `item` (`item_id`, `item_name`, `item_desc`, `item_img`, `item_statu
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `loan`
+--
+
+CREATE TABLE `loan` (
+  `id_loan` int(255) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `user_id` int(255) NOT NULL,
+  `loan_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `user_id` int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `user_id` int(255) NOT NULL,
   `user_name` varchar(200) NOT NULL,
   `user_email` varchar(200) NOT NULL,
-  `user_pass` varchar(200) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `user_pass` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `user`
@@ -72,6 +80,53 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_pass`) VALUES
 (2, 'renato', 'renato', 'renato');
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `fk_item_user` (`user_id`);
+
+--
+-- Indexes for table `loan`
+--
+ALTER TABLE `loan`
+  ADD PRIMARY KEY (`id_loan`),
+  ADD KEY `fk_loan_user` (`user_id`),
+  ADD KEY `fk_loan_item` (`item_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `loan`
+--
+ALTER TABLE `loan`
+  MODIFY `id_loan` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -80,6 +135,13 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_pass`) VALUES
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `fk_item_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Limitadores para a tabela `loan`
+--
+ALTER TABLE `loan`
+  ADD CONSTRAINT `fk_loan_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`),
+  ADD CONSTRAINT `fk_loan_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
