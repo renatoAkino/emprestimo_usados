@@ -1,5 +1,6 @@
 <?php
  include('dao/Item_dao.php');
+ include('dao/Loan_dao.php');
 
         
 class Loan{

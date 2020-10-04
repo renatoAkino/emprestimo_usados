@@ -87,9 +87,9 @@
             return $result;
         }
 
-        public function newloan(){
+        public function newloan($data){
             $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
-            $query ="INSERT INTO user(user_name, user_email, user_pass) VALUES ( '".$id_loan."', '".$item_id."', '".$user_id."')";
+            $query ="INSERT INTO loan(item_id, user_id) VALUES (  $data[0], $data[1])";
             $result = $this -> execute_query ($query);
             return 'talvez tenha dado';
         }

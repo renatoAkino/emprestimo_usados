@@ -8,15 +8,15 @@
         private $item_id ;
         private $user_id ;
 
-        function _construct($data){
-            $this-> id_loan = $data[0];
-            $this-> item_id = $data[1];
-            $this-> user_id = $data[2];
+        function __construct($data){
+            $this-> item_id = $data[0];
+            $this-> user_id = $data[1];
         }
 
         public function newloan(){
             $conn = new Connection_db;
-            $data = [$this->id_loan, $this->item_id, $this->user_id];
+            $loan = new Loan_DAO([$_POST['item_id'], $_SESSION['user_id']]);
+            $data = [$this->item_id, $this->user_id];
             return $conn->newLoan($data);
         }
         
