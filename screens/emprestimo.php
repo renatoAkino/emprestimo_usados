@@ -13,7 +13,7 @@
     echo 'emprestimo';
 ?>
 
-<form action='index.php?page=emprestimo' method='POST' enctype="multipart/form-data">
+<form action='dao/loan_dao.php?action=newloan' method='POST' enctype="multipart/form-data">
     <label>Escolha um item que deseja</label>
     <select name="item_id">
     <?php
@@ -23,4 +23,9 @@
     </select>
      <input type="submit" value="Enviar">
     </form>
+
+    <?php
+    $model = new loan();
+    echo $model -> get_loan_itens();
+    ?>
 

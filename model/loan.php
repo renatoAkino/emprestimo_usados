@@ -32,8 +32,13 @@ class Loan{
 
 
         public function cards_loan_itens($loan_list){
-
-
+            echo "<div class='row mt-4'>
+                    <div class='col-md-3'>
+                    <div class='title'>".$loan->getId_loan()."</div>
+                    <div class='description'>".$loan->getItem_id()."</div>
+                   <a href='dao/loan_dao.php?action=deleteloan'>Deletar</a>
+                </div></div>";
+        
         }
         
         public function cards_unloan_itens_list($itens_list)     

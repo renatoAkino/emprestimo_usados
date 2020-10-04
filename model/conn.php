@@ -91,13 +91,20 @@
             $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
             $query ="INSERT INTO loan(item_id, user_id) VALUES (  $data[0], $data[1])";
             $result = $this -> execute_query ($query);
+            $query = "UPDATE item SET item_status = 'EMPRESTADO' WHERE item_id = $data[0]";
+            $   $result = $this -> execute_query ($query);
             return 'talvez tenha dado';
         }
         
         public function deleteloan($id_loan){
             $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
-            $query = "DELETE FROM loan WHERE id_loan ". $id_loan;
+            $query = "SELECT item_id FROM loan WHERE id_loan =". $id_loan;
+            $item_id -> $this-> execute_query($query);
+            $query = "DELETE FROM loan WHERE id_loan =". $id_loan;
             $this -> execute_query($query);
+            $query = "UPDATE item SET item_status = 'Disponivel' WHERE item_id = ".$item_id;
+            $this -> execute_query($query);
+    
         }
 
         function list_loan_itens($user_id){
