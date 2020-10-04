@@ -1,5 +1,7 @@
 <?php
-    include('model /conn.php');
+    include_once('model/conn.php');
+
+    
     class Loan_DAO{
         
         private $id_loan ;
@@ -14,19 +16,46 @@
 
         public function newloan(){
             $conn = new Connection_db;
-            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
-            $query ="INSERT INTO user(user_name, user_email, user_pass) VALUES ( '".$id_loan."', '".$item_id."', '".$user_id."')";
-            $result = $this -> execute_query ($query);
-            return 'talvez tenha dado';
+            $data = [$this->id_loan, $this->item_id, $this->user_id];
+            return $conn->newLoan($data);
         }
         
-        public function deleteloan($id_loan)
+        public function deleteloan()
         {
             $conn = new Connection_db;
-            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
-            $query = "DELETE FROM loan WHERE id_loan ". $id_loan;
-            $this - > execute_query($query);
+            $conn -> deleteloan($this->id_loan);
         }
 
-    }
+       
+        function setItem_id($data){
+            $this->item_id = $data;
+        }
+        function getItem_id(){
+            return $this->item_id;
+        }
+
+        function setUser_id($data){
+            $this->user_id = $data;
+        }
+
+        function getUser_id(){
+            return $this->user_id;
+        }
+
+        function setId_loan($data){
+            $this->id_loan = $data;
+        }
+
+        function getId_loan(){
+            return $this->id_loan;
+        }
+
+
+
+       
+     }
+
+        
+
+    
 ?>

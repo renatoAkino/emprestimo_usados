@@ -1,6 +1,6 @@
 <?php
     include('tiles/navbar.php');
-    include('model/item.php');
+    include_once('model/item.php');
     if(isset($_POST['name'])){
         $item = new Item_DAO([ 0 , $_POST['name'], $_POST['desc'], $_POST['img'], 'Disponivel', $_SESSION['user_id']]);
         echo $item->register();

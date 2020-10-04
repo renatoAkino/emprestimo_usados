@@ -86,5 +86,42 @@
             $result = mysqli_query($conn, $query);
             return $result;
         }
+
+        public function newloan(){
+            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
+            $query ="INSERT INTO user(user_name, user_email, user_pass) VALUES ( '".$id_loan."', '".$item_id."', '".$user_id."')";
+            $result = $this -> execute_query ($query);
+            return 'talvez tenha dado';
+        }
+        
+        public function deleteloan($id_loan){
+            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
+            $query = "DELETE FROM loan WHERE id_loan ". $id_loan;
+            $this -> execute_query($query);
+        }
+
+        function list_loan_itens($user_id){
+
+            $query = "SELECT * FROM loan WHERE user_id = ".$user_id;
+            $result = $this ->execute_query($query);
+            if(mysqli_num_rows($result) >= 1){
+                $data = mysqli_fetch_all($result);
+                return $data;
+            }else{
+                echo $query;
+            } 
+        }
+
+       function list_unloan_itens(){
+           $query = "SELECT * FROM item WHERE item_status = Disponivel";
+           $result = $this -> execute_query($query);
+           if(mysqli_num_rows($result) >= 1){
+               $data  = mysqli_fetch_all($result);
+               return $data;
+           }else{
+               echo $query;
+           } 
+           }
+
     }
 ?>
