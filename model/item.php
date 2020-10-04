@@ -17,9 +17,9 @@ class Item{
 
     public function cards_list($itens_list)     
     {
-        
+        echo "<div class='row mt-4'>";
         foreach($itens_list as $item){
-            echo "<div class='container'>
+            echo "<div class='col-md-3'>
                 <div class='image'><img src='".$item->getItem_img()."' /></div>
                 <div class='title'>".$item->getItem_name()."</div>
                 <div class='description'>".$item->getItem_desc()."</div>
@@ -27,6 +27,7 @@ class Item{
                 <a href='?page=itens_edit&id=".$item->getItem_id()."'>Editar</a>
             </div>";
         }
+        echo "</div>";
         
     }
 }

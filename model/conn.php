@@ -113,9 +113,9 @@
         }
 
        function list_unloan_itens(){
-           $query = "SELECT * FROM item WHERE item_status = Disponivel";
-           $result = $this -> execute_query($query);
-           if(mysqli_num_rows($result) >= 1){
+           $query = "SELECT * FROM item WHERE item_status = 'Disponivel'";
+           $result = $this->execute_query($query);
+           if(mysqli_num_rows($result) > 0){
                $data  = mysqli_fetch_all($result);
                return $data;
            }else{

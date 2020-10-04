@@ -74,6 +74,7 @@ body {
 	font-size: 12px;
 	font-family: sans-serif;
 	background: #2c3e50;
+	color: #fff;
 }
 h1 {
 	text-align: center;
@@ -97,9 +98,4 @@ p {
 
 span {
     color: #2BD6B4;
-}
-.container{
-	border: 1px solid black;
-	background-color: white;
-	margin: 100px;
 }
