@@ -63,7 +63,11 @@
             header('location: ../index.php?page=itens');
         }
 
-        
+        function get_item($item_id){
+            $query = "SELECT * FROM item WHERE item_id = ". $item_id;
+            $result =  $this->execute_query($query);
+            return mysqli_fetch_array($result);
+        }
         function delete_item($item_id)
         {
             $query = "DELETE FROM item WHERE item_id = ". $item_id;
@@ -93,14 +97,11 @@
             $result = $this -> execute_query ($query);
             $query = "UPDATE item SET item_status = 'EMPRESTADO' WHERE item_id = $data[0]";
             $   $result = $this -> execute_query ($query);
-            return 'talvez tenha dado';
+            return 'Sucesso! ';
         }
         
-        public function deleteloan($id_loan){
-            $conn = new mysqli($this->server,$this->db_user,$this->db_pass,$this->db);
-            $query = "SELECT item_id FROM loan WHERE id_loan =". $id_loan;
-            $item_id -> $this-> execute_query($query);
-            $query = "DELETE FROM loan WHERE id_loan =". $id_loan;
+        public function deleteloan($item_id, $user_id){
+            $query = "DELETE FROM loan WHERE item_id =". $item_id . " AND user_id  = ".$user_id ;
             $this -> execute_query($query);
             $query = "UPDATE item SET item_status = 'Disponivel' WHERE item_id = ".$item_id;
             $this -> execute_query($query);
