@@ -17,6 +17,8 @@
             if(isset($_SESSION['user_id'])){
                 if(isset($_GET['page'])){
                     switch($_GET['page']){
+                        case 'emprestimoReturn':
+                        case 'emprestimoLoan':
                         case 'emprestimo':  $_SESSION['page'] = 'animation start-about'; 
                                             include('screens/emprestimo.php');break;
 

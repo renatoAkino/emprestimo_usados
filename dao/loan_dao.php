@@ -7,6 +7,7 @@
         private $id_loan ;
         private $item_id ;
         private $user_id ;
+        
 
         function __construct($data){
             $this-> item_id = $data[0];
@@ -23,7 +24,7 @@
         public function deleteloan()
         {
             $conn = new Connection_db;
-            $conn -> deleteloan($this->id_loan);
+            $conn -> deleteloan($this->item_id, $this->user_id);
         }
 
        
