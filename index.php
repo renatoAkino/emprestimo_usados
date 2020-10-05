@@ -40,12 +40,14 @@
         ?>
         
         
-            <form action='model/user.php?action=login' method='POST'>
+            <form action='model/user.php?action=login' method='POST' class="col-4 mx-auto mt-4 text-center">
+                <h2 class="text-center">Login</h2>
                 <input class="form-control" type='text' name='user'></br>
                 <input class="form-control" type='password' name='pass'></br>
                 <input class="form-control" type='submit' name='submit' value="Entrar">
+                <a href="screens/cadastro.php" class="mt-4 d-block mx-auto">Cadastrar-se</a>
             </form>
-            <a href="screens/cadastro.php">Cadastrar-se</a>
+            
             <?php
                 }
                 if(isset($_GET['login']) && $_GET['login'] == 'fail'){
